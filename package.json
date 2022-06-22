@@ -1,0 +1,15 @@
+{
+  "name": "reveal-timeline",
+  "version": "0.0.1",
+  "description": "reveal.js plugin for integrating timeline.js",
+  "main": "timeline.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dvirtz/reveal-timeline.git"
+  },
+  "author": "Dvir Yitzchaki",
+  "license": "MIT"
+}
