@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 
 module.exports = {
   entry: './src/timeline.ts',
@@ -19,6 +18,10 @@ module.exports = {
           "less-loader",
         ],
       },
+      {
+				test: /\.(jpe|jpg|woff|woff2|eot|ttf|svg)(\?.*$|$)/,
+				type: 'asset/inline'
+      }
     ],
   },
   resolve: {

@@ -1,0 +1,14 @@
+{
+  "name": "reveal-timeline-demo",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "demo": "reveal-md reveal-timeline.md -w",
+    "generate": "reveal-md reveal-timeline.md --static",
+    "clean": "rm -rf _static"
+  },
+  "devDependencies": {
+    "reveal-md": "^5.3.3",
+    "reveal-timeline": "^0.0.1"
+  }
+}

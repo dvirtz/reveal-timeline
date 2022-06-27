@@ -1,7 +1,8 @@
 ---
 scripts:
-  - plugin/reveal-timeline/timeline.js
+  - node_modules/reveal-timeline/dist/timeline.js
   - scripts/load-plugins.js
+highlightTheme: github
 revealOptions:
   embedded: true
 ---
@@ -40,3 +41,7 @@ Dvir Yitzchaki
 
 ## Eddie Vedder
 ### 4/20/02
+
+---
+
+## Thank you
