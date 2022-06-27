@@ -2,7 +2,6 @@ name: build
 
 on:
   pull_request:
-  push:
     branches:
       - main
 
@@ -57,9 +56,3 @@ jobs:
 
       - name: Generate static site
         run: npx lerna run generate
-
-      - name: Release
-        if: matrix.node_version == '18.x'
-        env:
-          GH_TOKEN: ${{ secrets.RELEASE_PAT }}
-        run: npx semantic-release
