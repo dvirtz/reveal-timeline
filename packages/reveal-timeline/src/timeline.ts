@@ -1,6 +1,6 @@
 import { Timeline } from "@knight-lab/timelinejs";
 
-function parseDate(dateString: string | null): ITimelineDate | undefined {
+export function parseDate(dateString: string | null): ITimelineDate | undefined {
   if (!dateString) {
     return;
   }
