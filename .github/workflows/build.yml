@@ -2,6 +2,7 @@ name: build
 
 on:
   pull_request:
+  push:
     branches:
       - main
 
@@ -42,6 +43,9 @@ jobs:
 
       - name: Bootstrap
         run: npx lerna bootstrap --hoist
+
+      - name: Build
+        run: npx lerna run build
 
       - name: Test
         run: npx lerna run test
