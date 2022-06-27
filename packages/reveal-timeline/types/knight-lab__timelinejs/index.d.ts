@@ -124,29 +124,29 @@ interface ITimelineDate {
   /*
    * BCE years should be negative numbers.
    */
-  year: number;
+  year: number | string;
   /*
    * 1-12
    */
-  month?: number | undefined;
-  day?: number | undefined;
+  month?: number | string;
+  day?: number | string;
   /*
    * 0-23
    */
-  hour?: number | undefined;
+  hour?: number | string;
   /*
    * 0-59
    */
-  minute?: number | undefined;
+  minute?: number | string;
   /*
    * 0-59
    */
-  second?: number | undefined;
-  millisecond?: number | undefined;
+  second?: number | string;
+  millisecond?: number | string;
   /*
    * A string for presenting the date. Useful if Timeline's date formatting doesn't fit your needs.
    */
-  display_date?: string | undefined;
+  display_date?: string | string;
 }
 
 interface ITimelineText {
@@ -395,3 +395,7 @@ interface ITimelineModifiedEvent {
 }
 // nav_next and nav_previous
 interface ITimelineNavEvent { }
+
+declare module '@knight-lab/timelinejs/src/js/date/TLDate';
+
+declare function parseDate(str: string): ITimelineDate;

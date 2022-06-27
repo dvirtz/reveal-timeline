@@ -1,43 +1,46 @@
 import { Timeline } from "@knight-lab/timelinejs";
 
-export function parseDate(dateString: string | null): ITimelineDate | undefined {
-  if (!dateString) {
-    return;
+function parseDate(date: string): ITimelineDate {
+  const ISO_DATE_PATTERN = /^(\d{4})(?:(?:-(\d+))(?:-(\d+))?)?(?:[T ](\d+):(\d+)(?::(\d+)(?:\.(\d+))?)?)?(?:Z(-?\d*))?$/;
+  const found = date.match(ISO_DATE_PATTERN);
+  if (!found) {
+    throw new Error(`invalid date ${date}`);
   }
 
-  const date = new Date(dateString);
+  const [_, year, month, day, hour, minutes, seconds, milliseconds] = [...found];
+
   return {
-    year: date.getUTCFullYear(),
-    month: date.getUTCMonth(),
-    day: date.getUTCDay(),
-    hour: date.getUTCHours(),
-    minute: date.getUTCMinutes(),
-    second: date.getUTCSeconds(),
-    millisecond: date.getUTCMilliseconds()
+    year: year,
+    month: month,
+    day: day,
+    hour: hour,
+    minute: minutes,
+    second: seconds,
+    millisecond: milliseconds
   };
 }
 
-function slideText(slide: Element, options: RevealTimelineOptions): ITimelineText | undefined {
-  for (const attr of ['data-timeline-headline', 'data-timeline-text'])
-  if (slide.hasAttribute(attr)) {
-    return {
-      headline: slide.getAttribute(attr)!
-    };
-  }
+function slideText(slide: Element, separator: string): ITimelineText | undefined {
+  for (const attr of ['data-timeline-headline'])
+    if (slide.hasAttribute(attr)) {
+      return {
+        headline: slide.getAttribute(attr)!
+      };
+    }
 
   const headings = Array.from(slide.querySelectorAll('h1, h2, h3, h4, h5, h6'));
-  if (headings) {
+  if (headings.length) {
     return {
-      headline: headings.map(_ => _.textContent).join(options.separator)
+      headline: headings.map(_ => _.textContent).join(separator)
     };
   }
 }
 
-function slideData(slide: Element, options: RevealTimelineOptions): ITimelineSlideData {
+export function slideData(slide: Element, options: RevealTimelineOptions = defaultOptions): ITimelineSlideData {
   return {
-    start_date: parseDate(slide.getAttribute('data-timeline-start-date')),
-    end_date: parseDate(slide.getAttribute('data-timeline-end-date')),
-    text: slideText(slide, options),
+    start_date: parseDate(slide.getAttribute('data-timeline-start-date')!),
+    end_date: slide.hasAttribute('data-timeline-end-date') ? parseDate(slide.getAttribute('data-timeline-end-date')!) : undefined,
+    text: slideText(slide, options.separator!),
     group: slide.getAttribute('data-timeline-group') ?? undefined,
     display_date: slide.getAttribute('data-timeline-display-date') ?? undefined,
     autolink: slide.hasAttribute('data-timeline-autolink') ? slide.getAttribute('data-timeline-autolink')?.toLowerCase() === 'true' : undefined,
@@ -51,16 +54,17 @@ interface RevealTimelineOptions {
   separator?: string
 }
 
+const defaultOptions: RevealTimelineOptions = {
+  height: '140px',
+  position: 'bottom',
+  separator: '<br><br>'
+};
+
 interface ExtendedRevealOptions extends RevealOptions {
   timeline: RevealTimelineOptions;
 }
 
 function init(deck: RevealStatic) {
-  const defaultOptions: RevealTimelineOptions = {
-    height: '140px',
-    position: 'bottom',
-    separator: '<br><br>'
-  };
   const options = Object.assign(defaultOptions, (deck.getConfig() as ExtendedRevealOptions).timeline ?? {});
   const timelineElement = document.body.insertAdjacentElement(options.position === 'top' ? 'afterbegin' : 'beforeend', document.createElement('div')) as HTMLElement;
   if (options.height) {
