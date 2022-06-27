@@ -43,7 +43,14 @@ plugins:
         releaseRules: *rules,
       },
     ]
-  - ["semantic-release-lerna", { generateNotes: true }]
+  - [
+      "semantic-release-lerna",
+      {
+        generateNotes: true,
+        preset: conventionalCommits,
+        presetConfig: { types: *types },
+      },
+    ]
   - "@semantic-release/changelog"
   - [
       "@semantic-release/git",
