@@ -16,22 +16,16 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 'lts/*'
+          node-version: "lts/*"
       - name: Install dependencies
         run: npm ci
       - name: Bootstrap
         run: npx lerna bootstrap --hoist
       - name: Build
         run: npx lerna run build
-      - name: Generate static site
-        run: yarn lerna run generate
-      - name: GitHub Pages action
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          personal_token: ${{ secrets.RELEASE_PAT }}
-          publish_dir: ./packages/reveal-timeline-demo/_static
       - name: Release
         env:
           GH_TOKEN: ${{ secrets.RELEASE_PAT }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
+
