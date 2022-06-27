@@ -3,3 +3,4 @@ node_modules/
 dist/
 .secrets
 coverage/
+packages/reveal-timeline-demo/_static/

@@ -49,10 +49,3 @@ jobs:
       - name: Test
         run: npx lerna run test
 
-      - name: "File generation check"
-        uses: setare/git-changes-action@v0.1.4
-        with:
-          github_token: ${{ github.token }}
-
-      - name: Generate static site
-        run: npx lerna run generate

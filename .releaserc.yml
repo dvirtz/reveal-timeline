@@ -42,9 +42,13 @@ plugins:
         presetConfig: { types: *types, releaseRules: *rules },
       },
     ]
-  - [
-      "semantic-release-lerna", 
-      { "generateNotes": true }
-    ]
+  - ["semantic-release-lerna", { "generateNotes": true }]
   - "@semantic-release/changelog"
   - "@semantic-release/git"
+  - [
+      "@qiwi/semantic-release-gh-pages-plugin",
+      {
+        msg: pages updated updated <%= nextRelease.gitTag %>,
+        src: ./packages/reveal-timeline-demo/_static,
+      },
+    ]
