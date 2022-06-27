@@ -42,9 +42,22 @@ plugins:
         presetConfig: { types: *types, releaseRules: *rules },
       },
     ]
-  - ["semantic-release-lerna", { "generateNotes": true }]
+  - ["semantic-release-lerna", { generateNotes: true }]
   - "@semantic-release/changelog"
-  - "@semantic-release/git"
+  - [
+      "@semantic-release/git",
+      {
+        assets:
+          [
+            CHANGELOG.md,
+            lerna.json,
+            package.json,
+            package-lock.json,
+            packages/*/package.json,
+            packages/*/package-lock.json,
+          ],
+      },
+    ]
   - [
       "@qiwi/semantic-release-gh-pages-plugin",
       {
