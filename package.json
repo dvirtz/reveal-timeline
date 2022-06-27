@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "reveal.js plugin for integrating timeline.js",
   "repository": {
     "type": "git",
