@@ -19,10 +19,12 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^17.0.3",
     "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
     "commitlint": "^17.0.3",
     "husky": "^8.0.0",
     "lerna": "^5.1.6",
-    "semantic-release": "^19.0.3"
+    "semantic-release": "^19.0.3",
+    "semantic-release-lerna": "^0.6.1"
   },
   "commitlint": {
     "extends": [
