@@ -36,14 +36,18 @@ function slideText(slide: Element, separator: string): ITimelineText | undefined
   }
 }
 
+function call<T, U>(arg: T | null, func: (_: T) => U): U | undefined {
+  return arg ? func(arg) : undefined;
+}
+
 export function slideData(slide: Element, options: RevealTimelineOptions = defaultOptions): ITimelineSlideData {
   return {
-    start_date: parseDate(slide.getAttribute('data-timeline-start-date')!),
-    end_date: slide.hasAttribute('data-timeline-end-date') ? parseDate(slide.getAttribute('data-timeline-end-date')!) : undefined,
+    start_date: call(slide.getAttribute('data-timeline-start-date'), parseDate),
+    end_date: call(slide.getAttribute('data-timeline-end-date'), parseDate),
     text: slideText(slide, options.separator!),
     group: slide.getAttribute('data-timeline-group') ?? undefined,
     display_date: slide.getAttribute('data-timeline-display-date') ?? undefined,
-    autolink: slide.hasAttribute('data-timeline-autolink') ? slide.getAttribute('data-timeline-autolink')?.toLowerCase() === 'true' : undefined,
+    autolink: call(slide.getAttribute('data-timeline-autolink'), _ => _.toLowerCase() === 'true'),
     unique_id: slide.id || undefined
   };
 }
