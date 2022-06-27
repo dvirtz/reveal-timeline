@@ -34,6 +34,7 @@ describe('timeline', function () {
         autolink: false
       }
     ],
+    ['', {}]
   ])('slideData %#', function (attributes, expected) {
     const element = createElementFromHTML(`<section ${attributes}></section>`);
     const slideData = plugin.slideData(element);
