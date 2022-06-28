@@ -3,8 +3,6 @@ scripts:
   - node_modules/reveal-timeline/dist/timeline.js
   - scripts/load-plugins.js
 highlightTheme: github
-revealOptions:
-  embedded: true
 ---
 
 <!-- .slide: data-timeline-title -->

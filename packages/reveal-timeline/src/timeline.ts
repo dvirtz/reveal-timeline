@@ -106,7 +106,7 @@ function init(deck: RevealStatic) {
     document.body.insertAdjacentElement(options.position === 'top' ? 'afterbegin' : 'beforeend', timelineElement);
     if (options.height) {
       timelineElement.style.height = typeof options.height == 'number' ? `${options.height}px` : options.height;
-      timelineElement.parentElement!.style.height = `${window.visualViewport.height - timelineElement.offsetHeight}px`;
+      deck.getSlidesElement().parentElement!.style.height = `${window.visualViewport.height - timelineElement.offsetHeight}px`;
     }
     const goTo = (slide: Element) => {
       const index = slideIndex(slide);
