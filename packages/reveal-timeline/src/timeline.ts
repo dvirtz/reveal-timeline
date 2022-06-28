@@ -70,13 +70,12 @@ interface ExtendedRevealOptions extends RevealOptions {
 
 function init(deck: RevealStatic) {
   const options = Object.assign(defaultOptions, (deck.getConfig() as ExtendedRevealOptions).timeline ?? {});
-  const timelineElement = document.body.insertAdjacentElement(options.position === 'top' ? 'afterbegin' : 'beforeend', document.createElement('div')) as HTMLElement;
-  if (options.height) {
-    timelineElement.style.height = typeof options.height == 'number' ? `${options.height}px` : options.height;
-    timelineElement.parentElement!.style.height = `${window.visualViewport.height - timelineElement.offsetHeight}px`;
-  }
   deck.on('ready', _ => {
     const slides = deck.getSlides().filter(_ => _.hasAttribute('data-timeline-start-date'));
+    if (!slides.length) {
+      console.warn('no slides with "data-timeline-start-date" attribute, disabling');
+      return;
+    }
     const timelineIndexToSlideIndices = new Map(Array.from(slides.entries()).map(([index, slide]) => [index, deck.getIndices(slide)]));
     const timelineConfig: ITimelineConfig = {
       events: slides.map(_ => slideData(_, options)),
@@ -102,7 +101,13 @@ function init(deck: RevealStatic) {
         event.stopImmediatePropagation();
       }
     });
+    const timelineElement = document.createElement('div');
     const timeline: Timeline = new Timeline(timelineElement, timelineConfig, timelineOptions);
+    document.body.insertAdjacentElement(options.position === 'top' ? 'afterbegin' : 'beforeend', timelineElement);
+    if (options.height) {
+      timelineElement.style.height = typeof options.height == 'number' ? `${options.height}px` : options.height;
+      timelineElement.parentElement!.style.height = `${window.visualViewport.height - timelineElement.offsetHeight}px`;
+    }
     const goTo = (slide: Element) => {
       const index = slideIndex(slide);
       if (index) {
