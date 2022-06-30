@@ -124,29 +124,29 @@ interface ITimelineDate {
   /*
    * BCE years should be negative numbers.
    */
-  year: number | string;
+  year: number;
   /*
    * 1-12
    */
-  month?: number | string;
-  day?: number | string;
+  month?: number;
+  day?: number;
   /*
    * 0-23
    */
-  hour?: number | string;
+  hour?: number;
   /*
    * 0-59
    */
-  minute?: number | string;
+  minute?: number;
   /*
    * 0-59
    */
-  second?: number | string;
-  millisecond?: number | string;
+  second?: number;
+  millisecond?: number;
   /*
    * A string for presenting the date. Useful if Timeline's date formatting doesn't fit your needs.
    */
-  display_date?: string | string;
+  display_date?: string;
 }
 
 interface ITimelineText {
