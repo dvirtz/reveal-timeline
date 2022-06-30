@@ -1,6 +1,6 @@
 {
   "name": "reveal-timeline-demo",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "demo": "reveal-md reveal-timeline.md -w",
@@ -9,6 +9,6 @@
   },
   "devDependencies": {
     "reveal-md": "^5.3.3",
-    "reveal-timeline": "^1.0.2"
+    "reveal-timeline": "^1.1.0"
   }
 }
