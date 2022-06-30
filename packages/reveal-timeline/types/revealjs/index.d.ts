@@ -2,9 +2,9 @@ interface RevealStatic {
   on(type: string, listener: (event: any) => void, useCapture?: boolean): void;
   off(type: string, listener: (event: any) => void, useCapture?: boolean): void;
 
-  getSlidesElement(): Element;
-  getRevealElement(): Element;
-  getViewportElement(): Element;
+  getSlidesElement(): HTMLElement;
+  getRevealElement(): HTMLElement;
+  getViewportElement(): HTMLElement;
   getSlides(): Element[];
 
   addKeyBinding(keyBinding: RevealKeyBinding, callback: () => void): void;
