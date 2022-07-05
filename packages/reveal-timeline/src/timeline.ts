@@ -161,12 +161,17 @@ function init(deck: RevealStatic) {
         event.stopImmediatePropagation();
       }
     });
+    const progress = deck.getRevealElement().querySelector('.progress') as HTMLDivElement;
     const timelineElement = document.createElement('div');
     const timeline: Timeline = new Timeline(timelineElement, { events, title: title && slideData(deck, title) }, timelineOptions);
-    document.body.insertAdjacentElement(options.position === 'top' ? 'afterbegin' : 'beforeend', timelineElement);
+    progress?.parentNode?.insertBefore(timelineElement, progress.nextSibling);
+    if (options.position == 'bottom') {
+      timelineElement.style.position = 'absolute';
+      timelineElement.style.bottom = `${progress.offsetHeight}px`;
+    }
     if (options.height) {
       timelineElement.style.height = typeof options.height == 'number' ? `${options.height}px` : options.height;
-      deck.getSlidesElement().parentElement!.style.height = `${window.visualViewport.height - timelineElement.offsetHeight}px`;
+      deck.configure({margin: (timelineElement.offsetHeight / deck.getComputedSlideSize().presentationHeight) * 2});
     }
     deck.on('slidechanged', (event: SlideEvent) => {
       duringSlideChange = true;
