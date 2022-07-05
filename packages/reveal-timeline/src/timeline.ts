@@ -173,9 +173,14 @@ function init(deck: RevealStatic) {
       timelineElement.style.height = typeof options.height == 'number' ? `${options.height}px` : options.height;
       deck.configure({margin: (timelineElement.offsetHeight / deck.getComputedSlideSize().presentationHeight) * 2});
     }
+    timelineElement.style.visibility = deck.getCurrentSlide()?.hasAttribute('data-timeline-hide') ? 'hidden' : 'visible';
     deck.on('slidechanged', (event: SlideEvent) => {
       duringSlideChange = true;
+
       timeline.goToId(uniqueId(deck, nearestSlide(event.currentSlide)));
+
+      timelineElement.style.visibility = event.currentSlide.hasAttribute('data-timeline-hide') ? 'hidden' : 'visible';
+      
       duringSlideChange = false;
     });
     timeline.on('change', event => {
