@@ -10,6 +10,8 @@ interface RevealStatic {
   addKeyBinding(keyBinding: RevealKeyBinding, callback: () => void): void;
   addKeyBinding(keyCode: number, callback: () => void): void;
   removeKeyBinding(keyCode: number): void;
+
+  getComputedSlideSize(): {width: number; height: number; presentationWidth: number; presentationHeight: number};
 }
 
 interface RevealPlugin {

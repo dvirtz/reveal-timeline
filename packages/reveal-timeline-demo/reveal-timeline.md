@@ -3,6 +3,9 @@ scripts:
   - node_modules/reveal-timeline/dist/timeline.js
   - scripts/load-plugins.js
 highlightTheme: github
+revealOptions:
+  timeline:
+    position: top
 ---
 
 <!-- .slide: data-timeline-title -->
