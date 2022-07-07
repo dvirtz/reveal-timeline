@@ -1,3 +1,16 @@
+## 1.2.0 (2022-07-07)
+
+
+### Features
+
+* **reveal-timeline:** add the ability to hide from slide 165b925
+
+
+### Bug Fixes
+
+* **reveal-timeline-demo, reveal-timeline:** work in full screen mode 7afd332
+* **reveal-timeline:** avoid hacking event listeners 7c31394
+
 ## 1.1.0 (2022-06-30)
 
 
