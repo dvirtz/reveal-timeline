@@ -153,14 +153,8 @@ function init(deck: RevealStatic) {
       timenav_height_min: 0,
       marker_padding: 0,
       start_at_slide: slideIndex(deck.getCurrentSlide()),
-      timenav_position: 'top',
+      timenav_position: 'top'
     };
-    // this needs to be before instantiating timeline
-    document.addEventListener('keydown', (event: KeyboardEvent) => {
-      if (['ArrowLeft', 'ArrowRight'].includes(event.key)) {
-        event.stopImmediatePropagation();
-      }
-    });
     const progress = deck.getRevealElement().querySelector('.progress') as HTMLDivElement;
     const timelineElement = document.createElement('div');
     const timeline: Timeline = new Timeline(timelineElement, { events, title: title && slideData(deck, title) }, timelineOptions);

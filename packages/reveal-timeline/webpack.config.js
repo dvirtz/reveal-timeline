@@ -21,6 +21,14 @@ module.exports = {
       {
 				test: /\.(jpe|jpg|woff|woff2|eot|ttf|svg)(\?.*$|$)/,
 				type: 'asset/inline'
+      },
+      {
+        test: /Timeline.js$/,
+        loader: 'string-replace-loader',
+        options: {
+          search: /.*\"keydown\".*\n/,
+          replace: ''
+        }
       }
     ],
   },
