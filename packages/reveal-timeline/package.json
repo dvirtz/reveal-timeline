@@ -7,8 +7,8 @@
   "main": "dist/index.js",
   "scripts": {
     "clean": "rm -rf ./dist",
-    "build": "webpack --mode=development",
-    "watch": "webpack --mode=development --watch",
+    "build": "webpack",
+    "watch": "webpack --watch",
     "test": "jest"
   },
   "devDependencies": {
