@@ -395,7 +395,3 @@ interface ITimelineModifiedEvent {
 }
 // nav_next and nav_previous
 interface ITimelineNavEvent { }
-
-declare module '@knight-lab/timelinejs/src/js/date/TLDate';
-
-declare function parseDate(str: string): ITimelineDate;
