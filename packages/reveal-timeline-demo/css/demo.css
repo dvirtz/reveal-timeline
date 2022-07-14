@@ -1,0 +1,21 @@
+#configuration thead {
+  display: none;
+}
+
+#configuration td {
+  border-bottom: none;
+}
+
+#logos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+#logos img {
+  height: 50px;
+}
+
+#github img {
+  filter: invert(1);
+}

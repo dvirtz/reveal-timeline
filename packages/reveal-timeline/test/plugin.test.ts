@@ -1,7 +1,8 @@
 const Reveal = require('reveal.js');
+
 import Timeline from '../src/timeline';
 
-describe('timeline', function () {
+describe('plugin', function () {
 
   // https://github.com/jsdom/jsdom/issues/135#issuecomment-602090020
   Object.defineProperties(window.HTMLElement.prototype, {
@@ -146,6 +147,24 @@ describe('timeline', function () {
 
     expect(warnSpy).toBeCalledWith('no slides with "data-timeline-start-date" attribute, disabling');
     expect(document.body.querySelector('.tl-timeline')).toBeNull();
+  });
+
+  test('json configuration', async function () {
+    document.body.innerHTML = `
+    <div class="reveal" style="height: 640px; width: 400px;">
+      <div class="slides">
+        <section data-timeline-start-date="1984">
+          <h1>TITLE</h1>
+        </section>
+      </div>
+    </div>
+    `;
+
+    let deck = new Reveal(document.body.querySelector('.reveal'), { plugins: [Timeline], timeline: JSON.stringify({ height: '120px' }) });
+    await deck.initialize();
+
+    const timeline = document.body.querySelector('div.tl-timeline') as HTMLDivElement;
+    expect(timeline.style.height == '120px');
   });
 
 });
