@@ -1,3 +1,20 @@
+## 1.2.1 (2022-07-14)
+
+
+### General maintenance
+
+* **reveal-timeline:** detect development mode e224d66
+
+
+### Tests
+
+* **reveal-timeline:** split to modules and reach 100% coverage f8c03c9
+
+
+### Documentation
+
+* **reveal-timeline-demo, reveal-timeline:** update demo f4c8812
+
 ## 1.2.0 (2022-07-07)
 
 
