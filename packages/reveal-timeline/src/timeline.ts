@@ -13,7 +13,8 @@ function isFirstSlide(deck: RevealStatic, slide: Element) {
 }
 
 function init(deck: RevealStatic) {
-  const options = _.defaults((deck.getConfig() as ExtendedRevealOptions).timeline ?? {}, defaultOptions);
+  const config = (deck.getConfig() as ExtendedRevealOptions).timeline ?? {};
+  const options = _.defaults(typeof config === 'string' ? JSON.parse(config) : config, defaultOptions);
   let duringSlideChange = true;
   deck.on('ready', () => {
     const slides = deck.getSlides().filter(hasTimeline);
@@ -47,7 +48,10 @@ function init(deck: RevealStatic) {
       start_at_slide: slideIndex(deck.getCurrentSlide()),
       timenav_position: 'top'
     };
+    const REVEAL_ELEMENT_ID = '__reveal_timeline_element';
+    document.getElementById(REVEAL_ELEMENT_ID)?.remove();
     const timelineElement = document.createElement('div');
+    timelineElement.id = REVEAL_ELEMENT_ID;
     const timeline: Timeline = new Timeline(timelineElement, { events, title: title && slideData(deck, title) }, timelineOptions);
     deck.getRevealElement().append(timelineElement);
     if (options.position == 'bottom') {
@@ -57,7 +61,11 @@ function init(deck: RevealStatic) {
     }
     if (options.height) {
       timelineElement.style.height = typeof options.height == 'number' ? `${options.height}px` : options.height;
-      deck.configure({ margin: (timelineElement.offsetHeight / deck.getComputedSlideSize().presentationHeight) * 2 });
+      timeline.on('loaded', ev => {
+        (timelineElement.querySelector('.tl-menubar') as HTMLElement).style.transform =
+          `scale(${timelineElement.offsetHeight / (defaultOptions.height as number)})`
+      });
+      deck.configure({ margin: (timelineElement.offsetHeight / deck.getComputedSlideSize().height) * 2 });
     }
     timelineElement.style.visibility = deck.getCurrentSlide().hasAttribute('data-timeline-hide') ? 'hidden' : 'visible';
     deck.on('slidechanged', (event: SlideEvent) => {
