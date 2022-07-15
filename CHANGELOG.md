@@ -1,3 +1,10 @@
+## 1.2.2 (2022-07-15)
+
+
+### General maintenance
+
+* **reveal-timeline-demo:** rename static site output to dist 7dc7f9b
+
 ## 1.2.1 (2022-07-14)
 
 
