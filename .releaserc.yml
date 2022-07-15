@@ -70,6 +70,6 @@ plugins:
       "@qiwi/semantic-release-gh-pages-plugin",
       {
         msg: pages updated updated <%= nextRelease.gitTag %>,
-        src: ./packages/reveal-timeline-demo/_static,
+        src: ./packages/reveal-timeline-demo/dist,
       },
     ]

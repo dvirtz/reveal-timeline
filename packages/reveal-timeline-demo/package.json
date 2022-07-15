@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "demo": "reveal-md reveal-timeline.md -w",
-    "build": "reveal-md reveal-timeline.md --static",
-    "clean": "rm -rf _static"
+    "build": "reveal-md reveal-timeline.md --static dist",
+    "clean": "rm -rf dist"
   },
   "devDependencies": {
     "reveal-md": "^5.3.3",
