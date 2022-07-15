@@ -1,3 +1,10 @@
+## 1.2.3 (2022-07-15)
+
+
+### General maintenance
+
+* **reveal-timeline-demo:** rename assets dir 7031cdc
+
 ## 1.2.2 (2022-07-15)
 
 
